@@ -38,16 +38,11 @@ using namespace CryptoPP;
 
 
 void PSS_ver(FILE *ptr,mpz_class n){
-    
     string T;
     FILE *ptr1 = fopen("pub_key.txt", "r");
-    
-    
     std::ifstream ifs("SampleTextFile_10kb.txt");
     std::string message( (std::istreambuf_iterator<char>(ifs) ),
                         (std::istreambuf_iterator<char>()    ) );
-    
-    
     int length;
     fscanf(ptr1,"%d",&length);
     //cout<<"LENGTH"<<length;
@@ -56,19 +51,9 @@ void PSS_ver(FILE *ptr,mpz_class n){
     mpz_class e;
     e =temp_e;
     fclose(ptr1);
-    
-    
-    
-    
-    
-    
     fscanf(ptr,"%d",&length);
     //cout<<"LENGTH"<<length;
     int  l=length;
-    
-    
-    
-    
     fscanf(ptr,"%d",&length);
     //cout<<"LENGTH"<<length;
     char temp_s[length];
@@ -84,9 +69,6 @@ void PSS_ver(FILE *ptr,mpz_class n){
     transform(T.begin(), T.end(), T.begin(), ::toupper);
     // cout<<"T"<<T;
     // cout<<"X in ver is "<<x<<'\n';
-    
-    
-    
     int olen = l/8;
     int wlen,seedlen;
     wlen=seedlen=20;
@@ -97,13 +79,10 @@ void PSS_ver(FILE *ptr,mpz_class n){
     string seedmask;
     string remainmask;
     string maskedseed;
-    
     // string T;
     //std::stringstream s;
-    
     //s<<x;
     //s>>T;
-    
     w=T;
     w.erase(20,w.length()-20);
     //  cout<<'\n'<<"W:"<<w;
@@ -125,12 +104,9 @@ void PSS_ver(FILE *ptr,mpz_class n){
     seed+=message;
     seed = FDH_(seed);
     seed.erase(20,seed.length());
-    
     //cout<<'\n'<<"rr"<<remainmask<<'\n'<<"r"<<remainmask2;
-    
     if(remainmask2==remainmask&&seed==w){
         cout<<"verified";
-        
     }
     else
         cout<<"NOT verified";
